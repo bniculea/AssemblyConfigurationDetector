@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyConfigurationDetect
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyConfigurationDetectorTest", "AssemblyConfigurationDetectorTest\AssemblyConfigurationDetectorTest.csproj", "{BCC4F629-5592-49FE-AD9F-B7E47848EA79}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpFiles", "HelpFiles", "{E0533B3F-3E69-4FDA-B664-C4C8FF350803}"
+	ProjectSection(SolutionItems) = preProject
+		UsefulLinks.txt = UsefulLinks.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

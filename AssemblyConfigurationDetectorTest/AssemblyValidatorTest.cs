@@ -32,6 +32,18 @@ namespace AssemblyConfigurationDetectorTest
 
         [TestMethod]
         [DeploymentItem("TestFiles")]
+        public void ValidUnmanagedAssembly_IsValid_ReturnsTrue()
+        {
+            AssemblyValidator assemblyValidator = new AssemblyValidator();
+
+            bool actual = assemblyValidator.IsValid("UnmanagedAssembly.dll");
+            bool expected = true;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DeploymentItem("TestFiles")]
         public void ValidAssembly_IsValidMultipleCalls_NoExceptionThrown()
         {
             AssemblyValidator assemblyValidator = new AssemblyValidator();

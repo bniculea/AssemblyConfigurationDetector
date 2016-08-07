@@ -60,6 +60,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestFiles\UnmanagedAssembly.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestFiles\ValidAssembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
