@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AssemblyArchitectureGrabberTest.cs" />
     <Compile Include="AssemblyValidatorTest.cs" />
+    <Compile Include="CorFlagsReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,7 +74,13 @@
     <Content Include="TestFiles\X64Assembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestFiles\X64UnmanagedAssembly.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestFiles\X86Assembly.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\X86UnmanagedAssembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestFiles\XmlAsDll.dll">

@@ -42,8 +42,13 @@
   <ItemGroup>
     <Compile Include="AssemblyArchitectureGrabber.cs" />
     <Compile Include="AssemblyValidator.cs" />
+    <Compile Include="CorFlags.cs" />
+    <Compile Include="CorFlagsReader.cs" />
+    <Compile Include="GeneralMachineType.cs" />
     <Compile Include="MachineType.cs" />
+    <Compile Include="PEFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Section.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
