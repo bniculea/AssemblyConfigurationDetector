@@ -1,10 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using ApplicationStartup.Model;
@@ -14,8 +17,13 @@ namespace ApplicationStartup
 {
     public partial class MainWindow : Window
     {
+        private const string IdColumn = "Id";
+        private const string FileNameColumn = "Filename";
+        private const string ArchitectureColumn = "Architecture";
+        private const string Location = "Location";
         private string SelectedPath { get; set; }
         private ObservableCollection<AssemblyConfigurationModel> AssemblyModelsCollection { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +43,7 @@ namespace ApplicationStartup
 
         private void AssemblyConfigurationDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DependencyObject dependencyObject = (DependencyObject)e.OriginalSource;
+            DependencyObject dependencyObject = (DependencyObject) e.OriginalSource;
             while (dependencyObject != null && !(dependencyObject is DataGridCell) &&
                    !(dependencyObject is DataGridColumnHeader))
             {
@@ -71,23 +79,24 @@ namespace ApplicationStartup
             if (IsOutputPathSelected())
             {
                 EnableControls(false);
-               await Task.Run(() =>
+                await Task.Run(() =>
                 {
                     Controller controller = new Controller(SelectedPath);
                     AssemblyModelsCollection = controller.GetModelsCollection();
                 });
-                
+
                 DataContext = AssemblyModelsCollection;
                 EnableControls(true);
                 MessageBox.Show(this, "Running finished!", "Assembly Configuration Detector", MessageBoxButton.OK,
-                MessageBoxImage.Information);
+                    MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show(this, "Please select a location.", "Assembly Configuration Detector", MessageBoxButton.OK,
+                MessageBox.Show(this, "Please select a location.", "Assembly Configuration Detector",
+                    MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
-           
+
         }
 
         private void EnableControls(bool isEnabled)
