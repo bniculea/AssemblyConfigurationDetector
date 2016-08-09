@@ -47,7 +47,8 @@
                       CanUserSortColumns="True"
                       IsReadOnly="True"
                       MouseDoubleClick="AssemblyConfigurationDataGrid_OnMouseDoubleClick"
-                      ItemsSource="{Binding}">
+                      ItemsSource="{Binding}"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Nr"
                                             IsReadOnly="True"

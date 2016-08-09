@@ -1,6 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using ApplicationStartup.Model;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -29,7 +34,30 @@ namespace ApplicationStartup
 
         private void AssemblyConfigurationDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-                
+            DependencyObject dependencyObject = (DependencyObject)e.OriginalSource;
+            while (dependencyObject != null && !(dependencyObject is DataGridCell) &&
+                   !(dependencyObject is DataGridColumnHeader))
+            {
+                dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
+            }
+            if (dependencyObject == null) return;
+            OpenExplorerAtSelectedLocation(dependencyObject);
+        }
+
+        private void OpenExplorerAtSelectedLocation(DependencyObject dependencyObject)
+        {
+            if (dependencyObject is DataGridCell)
+            {
+                DataGridCell selectedDataGridCell = dependencyObject as DataGridCell;
+                ContentPresenter contentPresenter = selectedDataGridCell.Content as ContentPresenter;
+
+                AssemblyConfigurationModel assemblyModel = contentPresenter?.Content as AssemblyConfigurationModel;
+                if (assemblyModel != null && File.Exists(assemblyModel.Location))
+                {
+                    string filePath = Path.GetDirectoryName(assemblyModel.Location);
+                    if (filePath != null) Process.Start(filePath);
+                }
+            }
         }
 
         private void ButtonCancel_OnClick(object sender, RoutedEventArgs e)
