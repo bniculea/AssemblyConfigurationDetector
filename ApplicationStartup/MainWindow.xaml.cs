@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -62,15 +63,44 @@ namespace ApplicationStartup
 
         private void ButtonCancel_OnClick(object sender, RoutedEventArgs e)
         {
-            
-
+            Application.Current.Shutdown();
         }
 
-        private void ButtonRun_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonRun_OnClick(object sender, RoutedEventArgs e)
         {
-           Controller controller = new Controller(SelectedPath);
-           AssemblyModelsCollection = controller.GetModelsCollection();
-           DataContext = AssemblyModelsCollection;
+            if (IsOutputPathSelected())
+            {
+                EnableControls(false);
+               await Task.Run(() =>
+                {
+                    Controller controller = new Controller(SelectedPath);
+                    AssemblyModelsCollection = controller.GetModelsCollection();
+                });
+                
+                DataContext = AssemblyModelsCollection;
+                EnableControls(true);
+                MessageBox.Show(this, "Running finished!", "Assembly Configuration Detector", MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show(this, "Please select a location.", "Assembly Configuration Detector", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+           
+        }
+
+        private void EnableControls(bool isEnabled)
+        {
+            InputPanel.IsEnabled = isEnabled;
+            ControlPanel.IsEnabled = isEnabled;
+            OutputPanel.IsEnabled = isEnabled;
+            ProgressbarStatus.IsIndeterminate = !isEnabled;
+        }
+
+        private bool IsOutputPathSelected()
+        {
+            return !string.IsNullOrEmpty(SelectedPath);
         }
     }
 }
