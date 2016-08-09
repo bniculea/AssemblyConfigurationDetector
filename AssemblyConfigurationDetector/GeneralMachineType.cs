@@ -5,6 +5,7 @@
        AnyCpu,
        X64,
        X86,
-       Unknown
+       Unknown,
+       Invalid
     }
 }

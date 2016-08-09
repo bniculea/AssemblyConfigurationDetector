@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyConfigurationDetector", "AssemblyConfigurationDetector\AssemblyConfigurationDetector.csproj", "{9E214E0B-1E7A-4696-B077-F3B7B06F266F}"
 EndProject
@@ -10,6 +10,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpFiles", "HelpFiles", "{E0533B3F-3E69-4FDA-B664-C4C8FF350803}"
 	ProjectSection(SolutionItems) = preProject
 		UsefulLinks.txt = UsefulLinks.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationStartup", "ApplicationStartup\ApplicationStartup.csproj", "{8661B0AD-8BBB-4D94-9324-B44A28857959}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{1D923D56-D5B6-4422-A584-95122C41A2F2}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\DirectoryUtilities.dll = Libs\DirectoryUtilities.dll
 	EndProjectSection
 EndProject
 Global
@@ -26,6 +33,10 @@ Global
 		{BCC4F629-5592-49FE-AD9F-B7E47848EA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC4F629-5592-49FE-AD9F-B7E47848EA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC4F629-5592-49FE-AD9F-B7E47848EA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8661B0AD-8BBB-4D94-9324-B44A28857959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8661B0AD-8BBB-4D94-9324-B44A28857959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8661B0AD-8BBB-4D94-9324-B44A28857959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8661B0AD-8BBB-4D94-9324-B44A28857959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

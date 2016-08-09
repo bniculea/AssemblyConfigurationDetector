@@ -51,7 +51,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AssemblyArchitectureGrabberTest.cs" />
-    <Compile Include="AssemblyValidatorTest.cs" />
     <Compile Include="CorFlagsReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

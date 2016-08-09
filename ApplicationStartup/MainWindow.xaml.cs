@@ -1,28 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ApplicationStartup.Model;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ApplicationStartup
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private string SelectedPath { get; set; }
+        private ObservableCollection<AssemblyConfigurationModel> AssemblyModelsCollection { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBrowse_OnClick(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog commonOpenFileDialog = new CommonOpenFileDialog("Select folder:");
+            commonOpenFileDialog.IsFolderPicker = true;
+            CommonFileDialogResult result = commonOpenFileDialog.ShowDialog();
+            if (result == CommonFileDialogResult.Ok)
+            {
+                TxtSelectedPath.Text = commonOpenFileDialog.FileName;
+                SelectedPath = TxtSelectedPath.Text;
+            }
+        }
+
+        private void AssemblyConfigurationDataGrid_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+                
+        }
+
+        private void ButtonCancel_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+
+        }
+
+        private void ButtonRun_OnClick(object sender, RoutedEventArgs e)
+        {
+           Controller controller = new Controller(SelectedPath);
+           AssemblyModelsCollection = controller.GetModelsCollection();
+           DataContext = AssemblyModelsCollection;
         }
     }
 }

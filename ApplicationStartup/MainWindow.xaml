@@ -5,8 +5,118 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationStartup"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Assembly Configuration Detector" Height="500" Width="525" MinHeight="500" MinWidth="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="InputPanel"
+                    Grid.Row="0"
+                    VerticalAlignment="Stretch"
+                    Margin="5, 10, 5,5"
+                   >
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Location" Grid.Column="0"
+                       HorizontalAlignment="Left"/>
+                <TextBox x:Name="TxtSelectedPath"
+                         Width="350" Grid.Column="1"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Left"
+                         IsReadOnly="True"/>
+                <Button x:Name="ButtonBrowse"
+                        Grid.Column="2"
+                        Content="Browse"
+                        HorizontalAlignment="Left"
+                        Width="50"
+                        Margin="5,0,5,0"
+                        Click="ButtonBrowse_OnClick"/>
+        </Grid>
+        </StackPanel>
+        <Grid x:Name="OutputPanel"
+              Margin="0,5,10,10"
+              Grid.Row="1">
+            <DataGrid x:Name="AssemblyConfigurationDataGrid"
+                      CanUserSortColumns="True"
+                      IsReadOnly="True"
+                      MouseDoubleClick="AssemblyConfigurationDataGrid_OnMouseDoubleClick"
+                      ItemsSource="{Binding}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Nr"
+                                            IsReadOnly="True"
+                                            >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Id}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Filename"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FileName}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Architecture"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Architecture}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Location"
+                                            IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Location}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+                
+            </DataGrid>
+        </Grid>
+        <StackPanel x:Name="ControlPanel"
+                    Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+             >
+            <Button x:Name="ButtonCancel"
+                    Content="Cancel"
+                    Width="50"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Click="ButtonCancel_OnClick"
+                    Margin="10,5,20,5"
+                    />
+            <Button x:Name="ButtonRun"
+                    Content="Run"
+                    Width="50"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="ButtonRun_OnClick"
+                    Margin="5,5,20,5"/>
+        </StackPanel>
+        <Grid x:Name="ProgressBarGrid"
+              Grid.Row="3"
+              Margin="5,5">
+            <ProgressBar x:Name="ProgressbarStatus"
+                         Minimum="0"
+                         Margin="100"/>
+        </Grid>
     </Grid>
 </Window>
