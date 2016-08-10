@@ -8,7 +8,7 @@
         Title="Assembly Configuration Detector" Height="500" Width="525" MinHeight="500" MinWidth="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.75*"/>
+            <RowDefinition Height="0.45*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="0.35*"/>
             <RowDefinition Height="0.25*"/>
@@ -39,24 +39,33 @@
                         Margin="5,0,5,0"
                         Click="ButtonBrowse_OnClick"/>
             </Grid>
+            
+        </StackPanel>
+        <Grid x:Name="OutputPanel"
+              Grid.Row="1"
+              Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <DockPanel x:Name="FilteringGrid"
-                       HorizontalAlignment="Center">
+                       Grid.Row="0"
+                       Margin="5,5">
                 <Label Content="Filter by architecture:"/>
                 <TextBox x:Name="TxtFilter"
                          Grid.Row="1"
                          Width="100"
-                         TextChanged="TxtFilter_OnTextChanged">
+                         TextChanged="TxtFilter_OnTextChanged"
+                         HorizontalAlignment="Left">
 
                 </TextBox>
             </DockPanel>
-        </StackPanel>
-        <Grid x:Name="OutputPanel"
-              Grid.Row="1">
             <DataGrid x:Name="AssemblyConfigurationDataGrid"
                       IsReadOnly="True"
                       MouseDoubleClick="AssemblyConfigurationDataGrid_OnMouseDoubleClick"
                       ItemsSource="{Binding}"
                       AutoGenerateColumns="False"
+                      Grid.Row="1"
                       >
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Id"
@@ -75,7 +84,7 @@
                                             IsReadOnly="True"
                                             CanUserSort="True"
                                             SortMemberPath="Filename"
-                                            Width="*">
+                                            Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FileName}"/>
@@ -87,7 +96,7 @@
                                             IsReadOnly="True"
                                             CanUserSort="True"
                                             SortMemberPath="Architecture"
-                                            Width="*">
+                                            Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Architecture}"/>
@@ -137,7 +146,8 @@
               Margin="5,5">
             <ProgressBar x:Name="ProgressbarStatus"
                          Minimum="0"
-                         Maximum="100"/>
+                         Maximum="100"
+                         MaxHeight="50"/>
         </Grid>
     </Grid>
 </Window>
