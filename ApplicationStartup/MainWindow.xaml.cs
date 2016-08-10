@@ -23,7 +23,8 @@ namespace ApplicationStartup
         private const string Location = "Location";
         private string SelectedPath { get; set; }
         private ObservableCollection<AssemblyConfigurationModel> AssemblyModelsCollection { get; set; }
-
+        private ICollectionView CollectionView { get; set; }
+        private string FilterText { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -84,8 +85,9 @@ namespace ApplicationStartup
                     Controller controller = new Controller(SelectedPath);
                     AssemblyModelsCollection = controller.GetModelsCollection();
                 });
-
-                DataContext = AssemblyModelsCollection;
+                CollectionView = CollectionViewSource.GetDefaultView(AssemblyModelsCollection);
+                CollectionView.Filter += DataGridFilterHandler;
+                DataContext = CollectionView;
                 EnableControls(true);
                 MessageBox.Show(this, "Running finished!", "Assembly Configuration Detector", MessageBoxButton.OK,
                     MessageBoxImage.Information);
@@ -99,6 +101,18 @@ namespace ApplicationStartup
 
         }
 
+        private bool DataGridFilterHandler(object item)
+        {
+            if (string.IsNullOrEmpty(FilterText)) return true;
+            AssemblyConfigurationModel model = item as AssemblyConfigurationModel;
+            if (model != null)
+            {
+                if (model.Architecture.ToUpper().Contains(FilterText.ToUpper()))
+                    return true;
+            }
+            return false;
+        }
+
         private void EnableControls(bool isEnabled)
         {
             InputPanel.IsEnabled = isEnabled;
@@ -110,6 +124,16 @@ namespace ApplicationStartup
         private bool IsOutputPathSelected()
         {
             return !string.IsNullOrEmpty(SelectedPath);
+        }
+
+        private void TxtFilter_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (CollectionView != null)
+            {
+                FilterText = TxtFilter.Text;
+                CollectionView.Refresh();
+                DataContext = CollectionView;
+            }
         }
     }
 }

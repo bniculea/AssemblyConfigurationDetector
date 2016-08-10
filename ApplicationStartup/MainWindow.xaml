@@ -39,11 +39,20 @@
                         Margin="5,0,5,0"
                         Click="ButtonBrowse_OnClick"/>
             </Grid>
+            <DockPanel x:Name="FilteringGrid"
+                       HorizontalAlignment="Center">
+                <Label Content="Filter by architecture:"/>
+                <TextBox x:Name="TxtFilter"
+                         Grid.Row="1"
+                         Width="100"
+                         TextChanged="TxtFilter_OnTextChanged">
+
+                </TextBox>
+            </DockPanel>
         </StackPanel>
         <Grid x:Name="OutputPanel"
               Grid.Row="1">
             <DataGrid x:Name="AssemblyConfigurationDataGrid"
-                     
                       IsReadOnly="True"
                       MouseDoubleClick="AssemblyConfigurationDataGrid_OnMouseDoubleClick"
                       ItemsSource="{Binding}"
@@ -54,6 +63,7 @@
                                             IsReadOnly="True"
                                             CanUserSort="True"
                                             SortMemberPath="Id"
+                                            Width="Auto"
                                             >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -64,7 +74,8 @@
                     <DataGridTemplateColumn Header="Filename"
                                             IsReadOnly="True"
                                             CanUserSort="True"
-                                            SortMemberPath="Filename">
+                                            SortMemberPath="Filename"
+                                            Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FileName}"/>
@@ -75,7 +86,8 @@
                     <DataGridTemplateColumn Header="Architecture"
                                             IsReadOnly="True"
                                             CanUserSort="True"
-                                            SortMemberPath="Architecture">
+                                            SortMemberPath="Architecture"
+                                            Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Architecture}"/>
@@ -86,7 +98,8 @@
                     <DataGridTemplateColumn Header="Location"
                                             IsReadOnly="True"
                                             CanUserSort="True"
-                                            SortMemberPath="Location">
+                                            SortMemberPath="Location"
+                                            Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Location}"/>
